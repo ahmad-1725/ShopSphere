@@ -119,7 +119,7 @@ const DashboardSidebar = () => {
   {/* HEADER */}
   <div className="px-2 py-4 border-b border-white/10">
     <h2 className="text-white font-['Instrument_Serif'] italic text-xl">
-      Digi<span className="text-[--gold]">Store</span>
+      Shop<span className="text-[--gold]">Sphere</span>
     </h2>
     <p className="text-white/40 uppercase text-xs">Admin Console</p>
   </div>

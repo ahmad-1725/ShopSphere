@@ -35,7 +35,7 @@ const Cart = () => {
           <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             {/* LOGO */}
             <h1 className="text-2xl font-normal font-[serif] italic text-[#0C0C10]">
-              Digi<span className="text-[--gold] ">Store</span>
+              Shop<span className="text-[--gold] ">Sphere</span>
             </h1>
 
             {/* DESKTOP MENU */}
@@ -101,7 +101,7 @@ const Cart = () => {
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
           {/* LOGO */}
           <h1 className="text-2xl font-normal font-[serif] italic text-[#0C0C10]">
-            Digi<span className="text-[--gold] ">Store</span>
+            Shop<span className="text-[--gold] ">Sphere</span>
           </h1>
 
           {/* DESKTOP MENU */}

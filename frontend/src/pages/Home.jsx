@@ -90,7 +90,7 @@ function Home() {
         <div className=" m-auto px-36 py-16 text-7xl font-[serif] font-black scale-x-125 inline-block ">
           <p className="text-[--ink] -mb-20 ">Why Choose</p> <br />
           <span className="font-['Instrument_Serif'] italic font-normal text-[--gold] py-16">
-            Digi Store
+            Shop Sphere
           </span>
         </div>
         <div className="max-w-6xl mx-auto px-8 grid md:grid-cols-3 gap-8">

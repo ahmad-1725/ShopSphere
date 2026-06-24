@@ -27,7 +27,7 @@ const Dashboard = () => {
       <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
 
         <h1 className="text-2xl font-['Instrument_Serif'] italic text-[#0C0C10] scale-x-125">
-          Digi<span className="text-[--gold]">Store</span>
+          Shop<span className="text-[--gold]">Sphere</span>
         </h1>
 
         <div className="hidden md:flex items-center gap-4">
