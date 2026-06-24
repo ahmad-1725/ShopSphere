@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8c87a;
+  --ink: #0c0c10;
+  --surface: #f7f5f0;
+  --muted: #8a8880;
+  --white: #ffffff;
+}
