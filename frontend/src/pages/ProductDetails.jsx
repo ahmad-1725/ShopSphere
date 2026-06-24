@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import api from "../services/api.js";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
+import Footer from "../components/Footer";
 
 import Header from "../components/Header";
 
@@ -16,6 +17,41 @@ const ProductDetails = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, logout } = useAuth();
 
+  // Reviews States
+  const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(5);
+  const [comment, setComment] = useState("");
+  const [reviewLoading, setReviewLoading] = useState(false);
+
+  const fetchReviews = async () => {
+    try {
+      const response = await api.get(`/products/${id}/reviews`);
+
+      setReviews(response.data.reviews);
+    } catch (error) {
+      console.error(err.response?.data || err.message);
+    }
+  };
+
+  const submitReview = async () => {
+    if (!rating) return;
+    try {
+      setReviewLoading(true);
+      await api.post(`/products/${id}/reviews`, {
+        rating,
+        comment,
+      });
+
+      setComment("");
+
+      fetchReviews();
+    } catch (error) {
+      console.error(err.response?.data || err.message);
+    } finally {
+      setReviewLoading(false);
+    }
+  };
+
   const fetchProduct = async () => {
     try {
       const { data } = await api.get(`/products/${id}`);
@@ -28,11 +64,11 @@ const ProductDetails = () => {
   };
   useEffect(() => {
     setCount(cart.reduce((sum, item) => sum + item.quantity, 0));
-    console.log(count);
   }, [cart]);
 
   useEffect(() => {
     fetchProduct();
+    fetchReviews();
   }, [id]);
 
   // TOAST
@@ -125,48 +161,48 @@ const ProductDetails = () => {
         "
       >
         <div
-  className="
-    relative
-    overflow-hidden
-    rounded-[1.75rem]
-    bg-[--white]
-    flex justify-center items-center
-    w-full lg:w-[42%]
-    h-fit
-    lg:sticky lg:top-10
-    py-10 sm:py-16
-    group
-  "
->
-  {product.stock === 0 && (
-    <p
-      className="
-        absolute left-4 top-4 z-10
-        px-4 py-[6px]
-        rounded-full
-        bg-[--ink]
-        text-[--white]
-        text-xs
-      "
-    >
-      OUT OF STOCK
-    </p>
-  )}
+          className="
+            relative
+            overflow-hidden
+            rounded-[1.75rem]
+            bg-[--white]
+            flex justify-center items-center
+            w-full lg:w-[42%]
+            h-fit
+            lg:sticky lg:top-10
+            py-10 sm:py-16
+            group
+          "
+        >
+          {product.stock === 0 && (
+            <p
+              className="
+                absolute left-4 top-4 z-10
+                px-4 py-[6px]
+                rounded-full
+                bg-[--ink]
+                text-[--white]
+                text-xs
+              "
+            >
+              OUT OF STOCK
+            </p>
+          )}
 
-  <div className="overflow-hidden">
-    <img
-      className="
-        max-h-[320px] sm:max-h-[420px]
-        object-contain
+          <div className="overflow-hidden">
+            <img
+              className="
+                max-h-[320px] sm:max-h-[420px]
+                object-contain
 
-        transition-transform duration-500 ease-out
-        group-hover:scale-105
-      "
-      src={product.image}
-      alt={product.name}
-    />
-  </div>
-</div>
+                transition-transform duration-500 ease-out
+                group-hover:scale-105
+              "
+              src={product.image}
+              alt={product.name}
+            />
+          </div>
+        </div>
         <div
           className="w-full lg:w-[58%]
         py-4 lg:py-6
@@ -192,13 +228,13 @@ const ProductDetails = () => {
           </h2>
           <p
             className="
-    text-sm sm:text-base
-    leading-relaxed
-    font-extralight
-    my-6 lg:my-8
-    py-6 lg:py-8
-    border-y
-  "
+              text-sm sm:text-base
+              leading-relaxed
+              font-extralight
+              my-6 lg:my-8
+              py-6 lg:py-8
+              border-y
+            "
           >
             {" "}
             {product.description}
@@ -213,11 +249,11 @@ const ProductDetails = () => {
           </div>
           <div
             className="
-    text-center
-    my-8 lg:my-10
-    py-8
-    border-y
-  "
+              text-center
+              my-8 lg:my-10
+              py-8
+              border-y
+            "
           >
             <button
               className="mb-3 w-full h-14 bg-[--ink] text-[--white] rounded-full
@@ -247,6 +283,84 @@ const ProductDetails = () => {
         </div>
       </div>
 
+      <div className="flex justify-center mb-10">
+        <div className="w-[80%] mt- border-t pt-10">
+          <h2 className="text-2xl font-semibold font-[serif] text-[--ink] mb-6">
+            Customer Reviews
+          </h2>
+
+          {/* REVIEW FORM */}
+          <div className="bg-[--white] border rounded-2xl p-6 mb-10 shadow-sm">
+            <h3 className="text-sm uppercase tracking-wider text-[--muted] mb-4">
+              Write a review
+            </h3>
+
+            <div className="flex flex-col gap-4">
+              <select
+                value={rating}
+                onChange={(e) => setRating(Number(e.target.value))}
+                className="w-full sm:w-40 border rounded-xl px-3 py-2 bg-transparent focus:outline-none focus:ring-2 focus:ring-[--ink]/10"
+              >
+                {[5, 4, 3, 2, 1].map((r) => (
+                  <option key={r} value={r}>
+                    {r} Star{r > 1 ? "s" : ""}
+                  </option>
+                ))}
+              </select>
+
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="Share your experience with this product..."
+                className="w-full min-h-[120px] border rounded-xl px-4 py-3 bg-transparent resize-none focus:outline-none focus:ring-2 focus:ring-[--ink]/10"
+              />
+
+              <button
+                onClick={submitReview}
+                disabled={reviewLoading}
+                className="self-end bg-[--ink] text-white px-6 py-2.5 rounded-full text-sm tracking-wide
+        hover:opacity-90 active:scale-[0.98] transition disabled:opacity-50"
+              >
+                {reviewLoading ? "Submitting..." : "Submit Review"}
+              </button>
+            </div>
+          </div>
+
+          {/* REVIEW LIST */}
+          {reviews.length === 0 ? (
+            <div className="text-center py-10 text-[--muted] border rounded-2xl bg-[--white]">
+              No reviews yet — be the first to share your thoughts.
+            </div>
+          ) : (
+            <div className="space-y-5">
+              {reviews.map((rev) => (
+                <div
+                  key={rev._id}
+                  className="bg-[--white] border rounded-2xl p-5 hover:shadow-sm transition"
+                >
+                  <div className="flex justify-between items-center">
+                    <p className="font-medium text-[--ink]">
+                      {rev.user?.name || "Anonymous"}
+                    </p>
+
+                    <p className="text-yellow-500 tracking-widest text-sm">
+                      {"★".repeat(rev.rating)}
+                      <span className="text-[--muted]">
+                        {"☆".repeat(5 - rev.rating)}
+                      </span>
+                    </p>
+                  </div>
+
+                  <p className="text-sm text-[--muted] mt-3 leading-relaxed">
+                    {rev.comment}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+      <Footer />
       <div
         className={`fixed bottom-8 left-1/2 z-[999]
           px-7 py-[14px] rounded-full

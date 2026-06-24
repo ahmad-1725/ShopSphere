@@ -9,7 +9,7 @@ const Footer = () => {
           Shop<span className="text-[--gold] ">Sphere</span>
         </h1>{" "}
         <p className="text-[--muted] text-sm font-light">
-          © 2026 Digi Store. All rights reserved.
+          © 2026 Shop Sphere. All rights reserved.
         </p>
       </div>
     </footer>

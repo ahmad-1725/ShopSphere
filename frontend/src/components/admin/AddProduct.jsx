@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import api from "../../services/api.js";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = ({ setProducts, setAddCard }) => {
   const [form, setForm] = useState({
@@ -10,6 +11,8 @@ const AddProduct = ({ setProducts, setAddCard }) => {
     stock: "",
     image: "",
   });
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,8 +26,14 @@ const AddProduct = ({ setProducts, setAddCard }) => {
 
       const { data } = await api.post("/products", payload);
 
-      setProducts((prev) => [...prev, data.product]);
+      console.log("POST /products response:", data);
 
+      // ✅ SAFE ADD
+      if (data?.product?._id) {
+        setProducts((prev) => [...prev, data.product]);
+      }
+
+      // reset form
       setForm({
         name: "",
         price: "",
@@ -35,6 +44,7 @@ const AddProduct = ({ setProducts, setAddCard }) => {
       });
 
       setAddCard(false);
+      navigate("/dashboard/products");
     } catch (err) {
       console.error(err.response?.data || err.message);
     }
@@ -42,9 +52,7 @@ const AddProduct = ({ setProducts, setAddCard }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-
-      {/* MODAL */}
-      <div className="bg-[--white] rounded-2xl shadow-xl w-full max-w-md p-6 relative">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 relative">
 
         {/* CLOSE */}
         <button
@@ -54,81 +62,73 @@ const AddProduct = ({ setProducts, setAddCard }) => {
           ✕
         </button>
 
-        {/* TITLE */}
         <h2 className="text-xl font-semibold mb-5 text-center">
           Add Product
         </h2>
 
-        {/* FORM */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
 
           <input
-            className="border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[--ink]"
             placeholder="Name"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
+            className="border px-3 py-2 rounded-lg"
           />
 
           <input
-            className="border px-3 py-2 rounded-lg"
-            placeholder="Price"
             type="number"
+            placeholder="Price"
             value={form.price}
             onChange={(e) => setForm({ ...form, price: e.target.value })}
+            className="border px-3 py-2 rounded-lg"
           />
 
           <input
-            className="border px-3 py-2 rounded-lg"
             placeholder="Description"
             value={form.description}
-            onChange={(e) =>
-              setForm({ ...form, description: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, description: e.target.value })}
+            className="border px-3 py-2 rounded-lg"
           />
 
           <input
-            className="border px-3 py-2 rounded-lg"
             placeholder="Category"
             value={form.category}
-            onChange={(e) =>
-              setForm({ ...form, category: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, category: e.target.value })}
+            className="border px-3 py-2 rounded-lg"
           />
 
           <input
-            className="border px-3 py-2 rounded-lg"
-            placeholder="Stock"
             type="number"
+            placeholder="Stock"
             value={form.stock}
             onChange={(e) => setForm({ ...form, stock: e.target.value })}
+            className="border px-3 py-2 rounded-lg"
           />
 
           <input
-            className="border px-3 py-2 rounded-lg"
             placeholder="Image URL"
             value={form.image}
             onChange={(e) => setForm({ ...form, image: e.target.value })}
+            className="border px-3 py-2 rounded-lg"
           />
 
-          {/* BUTTONS */}
           <div className="flex gap-3 mt-3">
-
             <button
               type="button"
               onClick={() => setAddCard(false)}
-              className="w-full border py-2 rounded-lg hover:bg-[--surface] transition"
+              className="w-full border py-2 rounded-lg"
             >
               Cancel
             </button>
 
             <button
               type="submit"
-              className="w-full bg-[--ink] text-white py-2 rounded-lg hover:bg-black transition"
+              className="w-full bg-black text-white py-2 rounded-lg"
             >
               Add Product
             </button>
-
           </div>
+
         </form>
       </div>
     </div>

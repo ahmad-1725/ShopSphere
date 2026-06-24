@@ -67,8 +67,9 @@ exports.getProducts = async (req, res) => {
     baseQuery.sort().pagination(resultPerPage);
 
     // Optional: avoid heavy fields
-    baseQuery.query = baseQuery.query.select("-reviews");
-
+    baseQuery.query = baseQuery.query.select(
+      "name price image category stock rating numOfReviews",
+    );
     // Execute query
     const products = await baseQuery.query;
 
@@ -191,9 +192,13 @@ exports.addReviews = async (req, res) => {
 
     product.numOfReviews = product.reviews.length;
 
+    product.numOfReviews = product.reviews.length;
+
     product.rating =
-      product.reviews.reduce((sum, item) => sum + item.rating, 0) /
-      product.numOfReviews;
+      product.numOfReviews === 0
+        ? 0
+        : product.reviews.reduce((sum, item) => sum + item.rating, 0) /
+          product.numOfReviews;
 
     await product.save();
 

@@ -128,70 +128,68 @@ function Home() {
       </section>
       <section className="py-24">
         <div
-  className="
-    bg-[--ink]
-    mx-4 md:mx-10 lg:mx-20
-    px-6 sm:px-10 lg:px-24
-    py-12 sm:py-16 lg:py-20
-    rounded-3xl
-    flex flex-col lg:flex-row
-    items-start lg:items-center
-    justify-between
-    gap-10
-  "
->
-  {/* LEFT TEXT */}
-  <div>
-    <p
-      className="
-        text-4xl sm:text-5xl lg:text-6xl
-        leading-[0.9]
-        font-extrabold
-        text-[--white]
-        font-[sans-serif]
-        inline-block
-        lg:scale-x-125 lg:scale-y-90
-      "
-    >
-      Ready to <br />
+          className="
+            bg-[--ink]
+            mx-4 md:mx-10 lg:mx-20
+            px-6 sm:px-10 lg:px-24
+            py-12 sm:py-16 lg:py-20
+            rounded-3xl
+            flex flex-col lg:flex-row
+            items-start lg:items-center
+            justify-between
+            gap-10
+          "
+        >
+          {/* LEFT TEXT */}
+          <div>
+            <p
+              className="
+                text-4xl sm:text-5xl lg:text-6xl
+                leading-[0.9]
+                font-extrabold
+                text-[--white]
+                font-[sans-serif]
+                inline-block
+                lg:scale-x-125 lg:scale-y-90
+              "
+            >
+              Ready to <br />
+              <span className="italic font-thin text-[--gold]">
+                Elevate
+              </span>{" "}
+              Your <br />
+              Setup?
+            </p>
+          </div>
 
-      <span className="italic font-thin text-[--gold]">
-        Elevate
-      </span>{" "}
-      Your <br />
+          {/* BUTTON */}
+          <div className="w-full lg:w-auto">
+            <button
+              onClick={() => navigate("/products")}
+              className="
+                w-full lg:w-auto
+                bg-[--gold]
+                text-[--ink]
+                text-xs sm:text-sm
+                tracking-[0.12em]
+                px-8 sm:px-10
+                py-4
+                rounded-full
 
-      Setup?
-    </p>
-  </div>
+                shadow-[0_0_80px_rgba(255,215,0,0.25)]
 
-  {/* BUTTON */}
-  <div className="w-full lg:w-auto">
-    <button
-      onClick={() => navigate("/products")}
-      className="
-        w-full lg:w-auto
-        bg-[--gold]
-        text-[--ink]
-        text-xs sm:text-sm
-        tracking-[0.12em]
-        px-8 sm:px-10
-        py-4
-        rounded-full
+                hover:shadow-[0_0_140px_rgba(255,215,0,0.6)]
+                hover:-translate-y-[2px]
 
-        shadow-[0_0_80px_rgba(255,215,0,0.25)]
-
-        hover:shadow-[0_0_140px_rgba(255,215,0,0.6)]
-        hover:-translate-y-[2px]
-
-        transition-all duration-500
-      "
-    >
-      EXPLORE ALL PRODUCTS
-    </button>
-  </div>
-</div>
+                transition-all duration-500
+              "
+            >
+              EXPLORE ALL PRODUCTS
+            </button>
+          </div>
+        </div>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

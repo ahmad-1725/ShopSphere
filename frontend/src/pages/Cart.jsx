@@ -144,45 +144,60 @@ const Cart = () => {
         </p>
       </div>
       <div className="flex lg:flex-row flex-col items-center lg:items-start lg:justify-evenly py-20">
-        {cart.map((item) => (
-          <div
-            className="h-fit flex w-[55%] px-4 py-4 bg-[--white] rounded-xl border-[1px]"
-            key={item._id}
-          >
-            <div className="w-24 mx-4 rounded-2xl bg-[--surface]">
-              <img src={item.image} alt="item.pic" />
-            </div>
-            {/* Product info */}
-            <div className="p-4 ">
-              <h3 className="uppercase text-xs font-medium text-[--gold]">
-                {item.category}
-              </h3>
-              <h3 className="font-[sans-serif] font-bold">{item.name}</h3>
-              <p className="text-[--muted] font-serif">${item.price}</p>
-            </div>
-            {/* Right side */}
-            <div className="flex flex-col items-end justify-between mx-4 w-2/4">
-              <h3 className="font-serif font-extrabold text-2xl">
-                ${(item.price * item.quantity).toFixed(2)}
-              </h3>
-              <div className="bg-[--surface] border-[1px] py-1 rounded-2xl flex flex-row">
-                <button className="px-2" onClick={() => item.quantity--}>
-                  -
-                </button>
-                <p className="px-4">{item.quantity}</p>
-                <button className="px-2" onClick={() => item.quantity++}>
-                  +
+        <div className="flex-col w-[60%]">
+          {cart.map((item) => (
+            <div
+              key={item._id}
+              className="flex items-center gap-4 p-4 m-4 bg-[--white] rounded-xl border"
+            >
+              {/* IMAGE */}
+              <div className="w-24 h-24 flex-shrink-0 rounded-2xl bg-[--surface] overflow-hidden">
+                <img
+                  src={item.image}
+                  alt="item.pic"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+
+              {/* PRODUCT INFO */}
+              <div className="flex-1">
+                <h3 className="uppercase text-xs font-medium text-[--gold]">
+                  {item.category}
+                </h3>
+
+                <h3 className="font-[sans-serif] font-bold">{item.name}</h3>
+
+                <p className="text-[--muted] font-serif">${item.price}</p>
+              </div>
+
+              {/* RIGHT SIDE */}
+              <div className="flex flex-col items-end justify-between min-w-[120px]">
+                <h3 className="font-serif font-extrabold text-2xl">
+                  ${(item.price * item.quantity).toFixed(2)}
+                </h3>
+
+                <div className="bg-[--surface] border py-1 rounded-2xl flex items-center">
+                  <button className="px-3" onClick={() => item.quantity--}>
+                    -
+                  </button>
+
+                  <p className="px-4">{item.quantity}</p>
+
+                  <button className="px-3" onClick={() => item.quantity++}>
+                    +
+                  </button>
+                </div>
+
+                <button
+                  className="text-[--muted] text-xs font-normal uppercase mt-2"
+                  onClick={() => removeFromCart(item._id)}
+                >
+                  Remove
                 </button>
               </div>
-              <button
-                className="text-[--muted] text-xs font-normal uppercase"
-                onClick={() => removeFromCart(item._id)}
-              >
-                Remove
-              </button>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
         <div className="w-[30%] bg-[--white] rounded-2xl">
           <div className="">
             <div className="border-b">
