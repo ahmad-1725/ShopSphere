@@ -322,7 +322,7 @@ GitHub: https://github.com/ahmad-1725/ShopSphere
 <img width="1768" height="860" alt="Screenshot 2026-06-25 123123" src="https://github.com/user-attachments/assets/17acedb6-5408-47d1-9337-9deb33861582" />
 <img width="3316" height="3306" alt="localhost_5173_product_6a3b6f90869aa27c4d3e3e33" src="https://github.com/user-attachments/assets/d90c7f1b-adca-410f-a2b3-55994aa8075a" />
 <img width="3316" height="2004" alt="localhost_5173" src="https://github.com/user-attachments/assets/8d3cc521-c0fc-4f01-b42b-c9c3f51508cf" />
-<img width="1886" height="881" alt="Screenshot 2026-06-25 121356" src="https://github.com/user-attachments/assets/fa622ca5-8600-4c54-a3f6-d74d401efb14" />
+<img width="1883" height="876" alt="Screenshot 2026-06-25 124605" src="https://github.com/user-attachments/assets/9645e067-b28b-4e70-a014-7fa2388e6219" />
 <img width="1905" height="884" alt="Screenshot 2026-06-25 121415" src="https://github.com/user-attachments/assets/9f66deba-7ccc-40fc-b39a-af27200cde2f" />
 <img width="1914" height="883" alt="Screenshot 2026-06-25 121514" src="https://github.com/user-attachments/assets/45f2ce80-bdf5-4c14-a7d5-a156464367af" />
 
